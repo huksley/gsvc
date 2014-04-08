@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://service.goverment.ru" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax21="http://service.goverment.ru/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://service.goverment.ru">
-    <wsdl:documentation>GovermentService</wsdl:documentation>
     <wsdl:types>
         <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.goverment.ru/xsd">
             <xs:complexType name="Request">
@@ -72,23 +71,17 @@
         </xs:schema>
         <xs:schema xmlns:ax22="http://service.goverment.ru/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.goverment.ru">
             <xs:import namespace="http://service.goverment.ru/xsd"/>
-            <xs:element name="findRequest">
-                <xs:complexType>
-                    <xs:sequence/>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="findRequestResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:Request"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="sendResponse">
+            <xs:element name="getState">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element minOccurs="0" name="requestId" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="response" nillable="true" type="ax21:Response"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getStateResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -103,6 +96,18 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="findRequest">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="findRequestResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:Request"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -122,17 +127,11 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="getState">
+            <xs:element name="sendResponse">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element minOccurs="0" name="requestId" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="getStateResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                        <xs:element minOccurs="0" name="response" nillable="true" type="ax21:Response"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -323,13 +322,13 @@
     </wsdl:binding>
     <wsdl:service name="GovermentService">
         <wsdl:port name="GovermentServiceHttpSoap11Endpoint" binding="ns:GovermentServiceSoap11Binding">
-            <soap:address location="http://localhost:8080/gsvc/services/GovermentService.GovermentServiceHttpSoap11Endpoint/"/>
+            <soap:address location="http://localhost:8080/axis2/services/GovermentService"/>
         </wsdl:port>
         <wsdl:port name="GovermentServiceHttpSoap12Endpoint" binding="ns:GovermentServiceSoap12Binding">
-            <soap12:address location="http://localhost:8080/gsvc/services/GovermentService.GovermentServiceHttpSoap12Endpoint/"/>
+            <soap12:address location="http://localhost:8080/axis2/services/GovermentService"/>
         </wsdl:port>
         <wsdl:port name="GovermentServiceHttpEndpoint" binding="ns:GovermentServiceHttpBinding">
-            <http:address location="http://localhost:8080/gsvc/services/GovermentService.GovermentServiceHttpEndpoint/"/>
+            <http:address location="http://localhost:8080/axis2/services/GovermentService"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>
