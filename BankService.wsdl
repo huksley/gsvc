@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://service.bank.ru" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax23="http://service.bank.ru/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://service.bank.ru">
+    <wsdl:documentation>BankService</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.bank.ru/xsd">
+            <xs:complexType name="Client">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="documentSerialNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="kpp" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name1" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name2" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="taxCode" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ClientAccount">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="code" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="openDate" nillable="true" type="xs:date"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ClientCredit">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="code" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="openDate" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="qty" nillable="true" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax24="http://service.bank.ru/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.bank.ru">
+            <xs:import namespace="http://service.bank.ru/xsd"/>
+            <xs:element name="getBIC">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getBICResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAccounts">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="client" nillable="true" type="ax23:Client"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAccountsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax23:ClientAccount"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getCredits">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="client" nillable="true" type="ax23:Client"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getCreditsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax23:ClientCredit"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="arrestAccount">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="client" nillable="true" type="ax23:Client"/>
+                        <xs:element minOccurs="0" name="acc" nillable="true" type="ax23:ClientAccount"/>
+                        <xs:element minOccurs="0" name="arrestDate" nillable="true" type="xs:date"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="arrestAccountResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:decimal"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="arrestAccountRequest">
+        <wsdl:part name="parameters" element="ns:arrestAccount"/>
+    </wsdl:message>
+    <wsdl:message name="arrestAccountResponse">
+        <wsdl:part name="parameters" element="ns:arrestAccountResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getBICRequest">
+        <wsdl:part name="parameters" element="ns:getBIC"/>
+    </wsdl:message>
+    <wsdl:message name="getBICResponse">
+        <wsdl:part name="parameters" element="ns:getBICResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAccountsRequest">
+        <wsdl:part name="parameters" element="ns:getAccounts"/>
+    </wsdl:message>
+    <wsdl:message name="getAccountsResponse">
+        <wsdl:part name="parameters" element="ns:getAccountsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getCreditsRequest">
+        <wsdl:part name="parameters" element="ns:getCredits"/>
+    </wsdl:message>
+    <wsdl:message name="getCreditsResponse">
+        <wsdl:part name="parameters" element="ns:getCreditsResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="BankServicePortType">
+        <wsdl:operation name="arrestAccount">
+            <wsdl:input message="ns:arrestAccountRequest" wsaw:Action="urn:arrestAccount"/>
+            <wsdl:output message="ns:arrestAccountResponse" wsaw:Action="urn:arrestAccountResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getBIC">
+            <wsdl:input message="ns:getBICRequest" wsaw:Action="urn:getBIC"/>
+            <wsdl:output message="ns:getBICResponse" wsaw:Action="urn:getBICResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAccounts">
+            <wsdl:input message="ns:getAccountsRequest" wsaw:Action="urn:getAccounts"/>
+            <wsdl:output message="ns:getAccountsResponse" wsaw:Action="urn:getAccountsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getCredits">
+            <wsdl:input message="ns:getCreditsRequest" wsaw:Action="urn:getCredits"/>
+            <wsdl:output message="ns:getCreditsResponse" wsaw:Action="urn:getCreditsResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="BankServiceSoap11Binding" type="ns:BankServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="arrestAccount">
+            <soap:operation soapAction="urn:arrestAccount" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getBIC">
+            <soap:operation soapAction="urn:getBIC" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAccounts">
+            <soap:operation soapAction="urn:getAccounts" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getCredits">
+            <soap:operation soapAction="urn:getCredits" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="BankServiceSoap12Binding" type="ns:BankServicePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="arrestAccount">
+            <soap12:operation soapAction="urn:arrestAccount" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getBIC">
+            <soap12:operation soapAction="urn:getBIC" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAccounts">
+            <soap12:operation soapAction="urn:getAccounts" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getCredits">
+            <soap12:operation soapAction="urn:getCredits" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="BankServiceHttpBinding" type="ns:BankServicePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="arrestAccount">
+            <http:operation location="arrestAccount"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getBIC">
+            <http:operation location="getBIC"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAccounts">
+            <http:operation location="getAccounts"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getCredits">
+            <http:operation location="getCredits"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="BankService">
+        <wsdl:port name="BankServiceHttpSoap11Endpoint" binding="ns:BankServiceSoap11Binding">
+            <soap:address location="http://localhost:8080/gsvc/services/BankService.BankServiceHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="BankServiceHttpSoap12Endpoint" binding="ns:BankServiceSoap12Binding">
+            <soap12:address location="http://localhost:8080/gsvc/services/BankService.BankServiceHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="BankServiceHttpEndpoint" binding="ns:BankServiceHttpBinding">
+            <http:address location="http://localhost:8080/gsvc/services/BankService.BankServiceHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<property name="build.home" value="${basedir}/../build"/>
+    <property file="${build.home}/projects/${project.name}.properties"/>
+
+	<property name="project.web" value="web"/>
+	<property name="project.name" value="gsvc"/>
+	<property name="project.war.file" value="${project.name}.war"/>
+    <property name="project.home" value="${basedir}"/>
+    <property name="project.source" value="src"/>
+    <property name="project.target.dir" value="${basedir}"/>
+
+	<target name="javadoc">
+		<javadoc access="public" additionalparam=" -docencoding UTF-8 -encoding Windows-1251 -charset Windows-1251" author="true" 
+			destdir="${project.target.dir}/${project.web}/javadoc"
+			doctitle="GSVC"
+			nodeprecated="false" nodeprecatedlist="false"
+			noindex="false" nonavbar="false" notree="false"                                                                                     
+			packagenames="ru.gpb.WebserviceTest" source="1.6"
+			splitindex="true" use="true" version="true">
+		    <packageset dir="${project.source}" defaultexcludes="yes"/>
+		</javadoc>
+    </target>
+	
+	<target name="distrib" depends="javadoc">
+		<delete file="${project.war.file}"/>	
+		<war destfile="${project.war.file}"
+			basedir="${project.target.dir}/${project.web}"
+			excludes="WEB-INF/java/, WEB-INF/webtest/, *.xml, **/*.bak, **/*.old*, **/*.temp"/>
+	</target>
+</project>

@@ -1,0 +1,16 @@
+<service name="GovermentService" scope="application">
+	<Description></Description>
+	
+	<parameter name="ServiceClass" locked="false">ru.goverment.service.GovermentService</parameter>
+	
+	<excludeOperations>
+    	<operation>main</operation>
+	</excludeOperations>
+	
+	<parameter name="beanPropertyRules">
+		<!-- 
+    	<bean class="sample.Address" excludeProperties="street" />
+    	<bean class="sample.AddressParent" excludeProperties="zipcode" />
+    	-->
+	</parameter>
+</service>

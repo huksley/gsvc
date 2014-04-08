@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://service.goverment.ru" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax21="http://service.goverment.ru/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://service.goverment.ru">
+    <wsdl:documentation>GovermentService</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.goverment.ru/xsd">
+            <xs:complexType name="Request">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="accounts" nillable="true" type="ax21:CustomerAccount"/>
+                    <xs:element minOccurs="0" name="id" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="legalCustomer" nillable="true" type="ax21:LegalCustomer"/>
+                    <xs:element minOccurs="0" name="naturalCustomer" nillable="true" type="ax21:NaturalCustomer"/>
+                    <xs:element minOccurs="0" name="state" type="xs:int"/>
+                    <xs:element minOccurs="0" name="type" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CustomerAccount">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="bic" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="openDate" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="picture" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="LegalCustomer">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="fullName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="kpp" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="shortName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="taxCode" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="NaturalCustomer">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="firstName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="identityDocument" nillable="true" type="ax21:IdentityDocument"/>
+                    <xs:element minOccurs="0" name="lastName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="middleName" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="IdentityDocument">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="birthDate" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="issueDate" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="number" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="serial" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Response">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="accountArrest" nillable="true" type="ax21:CustomerAccountArrest"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="accounts" nillable="true" type="ax21:CustomerAccount"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="credits" nillable="true" type="ax21:CustomerCredit"/>
+                    <xs:element minOccurs="0" name="requestId" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CustomerAccountArrest">
+                <xs:complexContent>
+                    <xs:extension base="ax21:CustomerAccount">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="arrestDate" nillable="true" type="xs:date"/>
+                            <xs:element minOccurs="0" name="balance" nillable="true" type="xs:decimal"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="CustomerCredit">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="bic" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="code" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="openDate" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="qty" nillable="true" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax22="http://service.goverment.ru/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.goverment.ru">
+            <xs:import namespace="http://service.goverment.ru/xsd"/>
+            <xs:element name="findRequest">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="findRequestResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:Request"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="sendResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="requestId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="response" nillable="true" type="ax21:Response"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="request" nillable="true" type="ax21:Request"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addRequestResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="updateState">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="requestId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="requestState" type="xs:int"/>
+                        <xs:element minOccurs="0" name="message" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="updateStateResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getState">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="requestId" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getStateResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="findRequestRequest">
+        <wsdl:part name="parameters" element="ns:findRequest"/>
+    </wsdl:message>
+    <wsdl:message name="findRequestResponse">
+        <wsdl:part name="parameters" element="ns:findRequestResponse"/>
+    </wsdl:message>
+    <wsdl:message name="sendResponseRequest">
+        <wsdl:part name="parameters" element="ns:sendResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addRequestRequest">
+        <wsdl:part name="parameters" element="ns:addRequest"/>
+    </wsdl:message>
+    <wsdl:message name="addRequestResponse">
+        <wsdl:part name="parameters" element="ns:addRequestResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getStateRequest">
+        <wsdl:part name="parameters" element="ns:getState"/>
+    </wsdl:message>
+    <wsdl:message name="getStateResponse">
+        <wsdl:part name="parameters" element="ns:getStateResponse"/>
+    </wsdl:message>
+    <wsdl:message name="updateStateRequest">
+        <wsdl:part name="parameters" element="ns:updateState"/>
+    </wsdl:message>
+    <wsdl:message name="updateStateResponse">
+        <wsdl:part name="parameters" element="ns:updateStateResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="GovermentServicePortType">
+        <wsdl:operation name="findRequest">
+            <wsdl:input message="ns:findRequestRequest" wsaw:Action="urn:findRequest"/>
+            <wsdl:output message="ns:findRequestResponse" wsaw:Action="urn:findRequestResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="sendResponse">
+            <wsdl:input message="ns:sendResponseRequest" wsaw:Action="urn:sendResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addRequest">
+            <wsdl:input message="ns:addRequestRequest" wsaw:Action="urn:addRequest"/>
+            <wsdl:output message="ns:addRequestResponse" wsaw:Action="urn:addRequestResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getState">
+            <wsdl:input message="ns:getStateRequest" wsaw:Action="urn:getState"/>
+            <wsdl:output message="ns:getStateResponse" wsaw:Action="urn:getStateResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateState">
+            <wsdl:input message="ns:updateStateRequest" wsaw:Action="urn:updateState"/>
+            <wsdl:output message="ns:updateStateResponse" wsaw:Action="urn:updateStateResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="GovermentServiceSoap11Binding" type="ns:GovermentServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="findRequest">
+            <soap:operation soapAction="urn:findRequest" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="sendResponse">
+            <soap:operation soapAction="urn:sendResponse" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="addRequest">
+            <soap:operation soapAction="urn:addRequest" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getState">
+            <soap:operation soapAction="urn:getState" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateState">
+            <soap:operation soapAction="urn:updateState" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="GovermentServiceSoap12Binding" type="ns:GovermentServicePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="findRequest">
+            <soap12:operation soapAction="urn:findRequest" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="sendResponse">
+            <soap12:operation soapAction="urn:sendResponse" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="addRequest">
+            <soap12:operation soapAction="urn:addRequest" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getState">
+            <soap12:operation soapAction="urn:getState" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateState">
+            <soap12:operation soapAction="urn:updateState" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="GovermentServiceHttpBinding" type="ns:GovermentServicePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="findRequest">
+            <http:operation location="findRequest"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="sendResponse">
+            <http:operation location="sendResponse"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="addRequest">
+            <http:operation location="addRequest"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getState">
+            <http:operation location="getState"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateState">
+            <http:operation location="updateState"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="GovermentService">
+        <wsdl:port name="GovermentServiceHttpSoap11Endpoint" binding="ns:GovermentServiceSoap11Binding">
+            <soap:address location="http://localhost:8080/gsvc/services/GovermentService.GovermentServiceHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="GovermentServiceHttpSoap12Endpoint" binding="ns:GovermentServiceSoap12Binding">
+            <soap12:address location="http://localhost:8080/gsvc/services/GovermentService.GovermentServiceHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="GovermentServiceHttpEndpoint" binding="ns:GovermentServiceHttpBinding">
+            <http:address location="http://localhost:8080/gsvc/services/GovermentService.GovermentServiceHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

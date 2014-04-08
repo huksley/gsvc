@@ -1,0 +1,15 @@
+<service name="BankService" scope="application">
+	<Description></Description>	
+	<parameter name="ServiceClass" locked="false">ru.bank.service.BankService</parameter>
+	
+	<excludeOperations>
+    	<operation>main</operation>
+	</excludeOperations>
+	
+	<parameter name="beanPropertyRules">
+		<!-- 
+    	<bean class="sample.Address" excludeProperties="street" />
+    	<bean class="sample.AddressParent" excludeProperties="zipcode" />
+    	-->
+	</parameter>
+</service>
