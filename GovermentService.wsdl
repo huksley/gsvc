@@ -71,20 +71,6 @@
         </xs:schema>
         <xs:schema xmlns:ax22="http://service.goverment.ru/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.goverment.ru">
             <xs:import namespace="http://service.goverment.ru/xsd"/>
-            <xs:element name="getState">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="requestId" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="getStateResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="return" type="xs:int"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
             <xs:element name="addRequest">
                 <xs:complexType>
                     <xs:sequence>
@@ -96,18 +82,6 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="findRequest">
-                <xs:complexType>
-                    <xs:sequence/>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="findRequestResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:Request"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -132,6 +106,32 @@
                     <xs:sequence>
                         <xs:element minOccurs="0" name="requestId" nillable="true" type="xs:string"/>
                         <xs:element minOccurs="0" name="response" nillable="true" type="ax21:Response"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="findRequest">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="findRequestResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:Request"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getState">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="requestId" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getStateResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>

@@ -30,9 +30,9 @@ public class GovermentService {
     		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     		Request r = new Request();
     		r.naturalCustomer = new NaturalCustomer();
-    		r.naturalCustomer.lastName = "Тестов";
-    		r.naturalCustomer.firstName = "Тест";
-    		r.naturalCustomer.middleName = "Тестович";
+    		r.naturalCustomer.lastName = "Testov";
+    		r.naturalCustomer.firstName = "Test";
+    		r.naturalCustomer.middleName = "Testovich";
     		r.naturalCustomer.identityDocument = new IdentityDocument();
     		r.naturalCustomer.identityDocument.birthDate = df.parse("1979-04-13");
     		r.naturalCustomer.identityDocument.issueDate = df.parse("2003-05-28");
@@ -43,10 +43,10 @@ public class GovermentService {
     		
     		Request lr = new Request();
     		lr.legalCustomer = new LegalCustomer();
-    		lr.legalCustomer.fullName = "Закрытое Акционерное Общество Битумно-Анилиновый Научный Терминал";
+    		lr.legalCustomer.fullName = "Russian Bank Systems Joint Stock Company";
     		lr.legalCustomer.kpp = "312892828";
     		lr.legalCustomer.taxCode = "312818191919";
-    		lr.legalCustomer.shortName = "БАНТ (ЗАО)";
+    		lr.legalCustomer.shortName = "BANKSYSTEMS JSC";
     		lr.type = RequestType.ARREST;
     		addRequest(lr);
 		} catch (Exception e) {

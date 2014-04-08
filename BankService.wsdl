@@ -11,6 +11,12 @@
                     <xs:element minOccurs="0" name="taxCode" nillable="true" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
+            <xs:complexType name="ClientAccount">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="code" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="openDate" nillable="true" type="xs:date"/>
+                </xs:sequence>
+            </xs:complexType>
             <xs:complexType name="ClientCredit">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="code" nillable="true" type="xs:string"/>
@@ -18,26 +24,18 @@
                     <xs:element minOccurs="0" name="qty" nillable="true" type="xs:decimal"/>
                 </xs:sequence>
             </xs:complexType>
-            <xs:complexType name="ClientAccount">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="code" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="openDate" nillable="true" type="xs:date"/>
-                </xs:sequence>
-            </xs:complexType>
         </xs:schema>
         <xs:schema xmlns:ax22="http://service.bank.ru/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.bank.ru">
             <xs:import namespace="http://service.bank.ru/xsd"/>
-            <xs:element name="getCredits">
+            <xs:element name="getBIC">
                 <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="client" nillable="true" type="ax21:Client"/>
-                    </xs:sequence>
+                    <xs:sequence/>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="getCreditsResponse">
+            <xs:element name="getBICResponse">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ClientCredit"/>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -55,15 +53,17 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="getBIC">
-                <xs:complexType>
-                    <xs:sequence/>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="getBICResponse">
+            <xs:element name="getCredits">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="client" nillable="true" type="ax21:Client"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getCreditsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax21:ClientCredit"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>

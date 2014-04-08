@@ -5,7 +5,7 @@
 
 <ul>
 	<li><a href="javadoc">Javadoc</a>
-	<li><a href="process">Process requests</a> (restart to 
+	<li><a href="process">Process requests</a> (restart to reset queue or add requests manually using GovermentService.addRequest method)
 	<li><a href="services/GovermentService?wsdl">GovermentService WSDL</a>
 	<li><a href="services/BankService?wsdl">BankService WSDL</a>
 </ul>

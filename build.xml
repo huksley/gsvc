@@ -41,12 +41,17 @@
 
 		<javac classpathref="classpath" srcdir="${project.source}" source="1.6" target="1.6" 
 			encoding="UTF-8"
-			destdir="${project.classes}" debug="true" />
+			destdir="${project.classes}" debug="true"
+			excludes="ru/bank/integration/**/*.java" />
 			
-    	<exec executable="getwsdl.bat" osfamily="windows" failonerror="true"/>
-    	<exec executable="./getwsdl.sh" osfamily="unix" failonerror="true"/>
+    	<exec executable="genwsdl.bat" osfamily="windows" failonerror="true"/>
+    	<exec executable="./genwsdl.sh" osfamily="unix" failonerror="true"/>
     	<exec executable="genclient.bat" osfamily="windows" failonerror="true"/>
     	<exec executable="./genclient.sh" osfamily="unix" failonerror="true"/>
+
+		<javac classpathref="classpath" srcdir="${project.source}" source="1.6" target="1.6" 
+			encoding="UTF-8"
+			destdir="${project.classes}" debug="true" />
 
 		<javac classpathref="classpath" srcdir="gen-src" source="1.6" target="1.6" 
 			encoding="UTF-8"
