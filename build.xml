@@ -49,11 +49,11 @@
     	<exec executable="genclient.bat" osfamily="windows" failonerror="true"/>
     	<exec executable="./genclient.sh" osfamily="unix" failonerror="true"/>
 
-		<javac classpathref="classpath" srcdir="${project.source}" source="1.6" target="1.6" 
+		<javac classpathref="classpath" srcdir="gen-src" source="1.6" target="1.6" 
 			encoding="UTF-8"
 			destdir="${project.classes}" debug="true" />
 
-		<javac classpathref="classpath" srcdir="gen-src" source="1.6" target="1.6" 
+		<javac classpathref="classpath" srcdir="${project.source}" source="1.6" target="1.6" 
 			encoding="UTF-8"
 			destdir="${project.classes}" debug="true" />
 
