@@ -19,7 +19,7 @@ http://localhost:8080/gsvc/javadoc
 
 == REQUIREMENTS ==
 
-	- JDK 7
+	- JDK 6
 	- Apache Tomcat 7.0.x
 	- Apache Ant 1.8.x
 
